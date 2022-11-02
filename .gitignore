@@ -1,0 +1,13 @@
+/back/target
+/back/Cargo.lock
+
+/front/elm.js
+/front/package.json
+/front/tailwind_watcher.css
+/front/.log
+/front/.parcel-cache
+/front/dist
+/front/elm-stuff
+/front/node_modules
+/front/yarn.lock
+/front/.projectile
