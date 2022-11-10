@@ -37,10 +37,10 @@ RUN parcel build index.html
 FROM debian:buster-slim
 
 # copy the build artifact from the build stage
-COPY --from=back_build /back/target/release/back .
-COPY --from=front_build /front/dist ./dist
+COPY --from=back_build /back/target/release/back ./back/run
+COPY --from=front_build /front/dist ./front/dist
 
 # set the startup command to run
-CMD ["./back"]
+CMD ["./back/run"]
 
 EXPOSE 7878

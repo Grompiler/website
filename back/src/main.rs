@@ -25,7 +25,7 @@ async fn main() {
         )
         .push(
             Router::with_path("<**>").get(
-                StaticDir::new(["dist"])
+                StaticDir::new(["../front/dist"])
                     .with_defaults("./index.html")
                     .with_fallback("./index.html"),
             ),
