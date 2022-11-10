@@ -10,4 +10,4 @@
 /front/elm-stuff
 /front/node_modules
 /front/yarn.lock
-/front/.projectile
+*/.projectile
