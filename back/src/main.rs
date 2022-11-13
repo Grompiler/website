@@ -3,15 +3,26 @@ use salvo::serve_static::StaticDir;
 
 #[handler]
 async fn home() -> &'static str {
-    "this is the home page"
+    "# this is the home page"
 }
 #[handler]
 async fn books() -> &'static str {
-    "this is the book page"
+    "## this is the h2 book page"
 }
 #[handler]
 async fn articles() -> &'static str {
-    "those are my articles from backend"
+    r#"
+        # then we have a h1 style \endline
+        ## then we have 2 h2 styles \endline
+        ## then we have 2 h2 styles \endline
+        Those are my articles from backend those are my articles from backend \endline
+        those are my articles from backend
+        those are my articles from backend
+        those are my articles from backend.
+        Those are my articles from backend,
+        those are my articles from backend,
+        those are my articles from backend.
+    "#
 }
 
 #[tokio::main]
@@ -34,4 +45,7 @@ async fn main() {
     Server::new(TcpListener::bind("127.0.0.1:7878"))
         .serve(router)
         .await;
+}
+struct Publication {
+    content: String,
 }

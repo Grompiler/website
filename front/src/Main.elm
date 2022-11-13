@@ -8,6 +8,8 @@ import Html.Events exposing (onClick)
 import Html.Lazy exposing (lazy)
 import Http
 import List
+import Markdown exposing (Markdown, markdownToHtml)
+import Styles exposing (bodyStyle, headerStyle, paddingStyle, paragraphStyle)
 import Url exposing (Url)
 import Url.Parser as Parser exposing ((</>), Parser, oneOf, s, string)
 
@@ -158,7 +160,7 @@ view : Model -> Browser.Document Msg
 view model =
     { title = "TITRE"
     , body =
-        [ div [ class "w-screen h-screen bg-black-dark selection:bg-green selection:text-black-dark overflow-auto text-justify" ]
+        [ div [ class bodyStyle ]
             [ viewHeader model.page
             , lazy showPage model
             ]
@@ -170,16 +172,16 @@ showPage : Model -> Html Msg
 showPage model =
     case model.page of
         HomePage ->
-            div [] [ p [ class paragraphText ] [ text <| getText model.homeStatus ] ]
+            div [ class paddingStyle ] [ markdownToHtml <| getText model.homeStatus ]
 
         ArticlesPage ->
-            div [] [ p [ class paragraphText ] [ text <| getText model.articlesStatus ] ]
+            div [ class paddingStyle ] [ markdownToHtml <| getText model.articlesStatus ]
 
         BooksPage ->
-            div [] [ p [ class paragraphText ] [ text <| getText model.booksStatus ] ]
+            div [ class paddingStyle ] [ markdownToHtml <| getText model.booksStatus ]
 
         NotFound ->
-            div [] [ p [ class paragraphText ] [ text "NOT FOUND" ] ]
+            div [ class paddingStyle ] [ text "NOT FOUND" ]
 
 
 getText : Status -> String
@@ -245,23 +247,13 @@ viewHeader page =
                         ]
                     ]
                     [ div
-                        [ class headerText ]
+                        [ class headerStyle ]
                         [ text caption ]
                     ]
                 ]
     in
     div []
         [ links ]
-
-
-paragraphText : String
-paragraphText =
-    "text-white py-8 sm:py-16 px-6 sm:px-12 first-letter:text-4xl first-letter:text-bold first-letter:uppercase"
-
-
-headerText : String
-headerText =
-    "font-bold text-black-dark text-base hover:text-blue sm:text-xl h-full grid place-content-center"
 
 
 isActive : { link : Route, page : Page } -> Bool
