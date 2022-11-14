@@ -1,7 +1,7 @@
 module Markdown exposing (..)
 
-import Html exposing (Html, div, h1, h2, p, text)
-import Html.Attributes exposing (class, classList)
+import Html exposing (Html, div, h1, h2, img, p, text)
+import Html.Attributes exposing (class, classList, src)
 import Styles exposing (addStyles, h1Style, h2Style, paddingStyle, paragraphStyle)
 
 
@@ -31,6 +31,23 @@ parseLineStyle line =
         Just "##" ->
             h2 [ class h2Style ] [ text <| String.toUpper <| String.replace "##" "" line ]
 
+        Just "\\image" ->
+            let
+                tail =
+                    List.tail cleanLine
+            in
+            case tail of
+                Just elements ->
+                    case getImageTitleAndPath elements of
+                        Just ( title, filePath ) ->
+                            img [ src filePath ] []
+
+                        Nothing ->
+                            text ""
+
+                Nothing ->
+                    text ""
+
         _ ->
             case String.isEmpty line of
                 True ->
@@ -38,3 +55,13 @@ parseLineStyle line =
 
                 False ->
                     p [ class paragraphStyle ] [ text line ]
+
+
+getImageTitleAndPath : List String -> Maybe ( String, String )
+getImageTitleAndPath list =
+    case List.tail list of
+        Just (title :: filePath :: _) ->
+            Just ( title, filePath )
+
+        _ ->
+            Nothing

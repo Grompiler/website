@@ -5,10 +5,12 @@ use salvo::serve_static::StaticDir;
 async fn home() -> &'static str {
     "# this is the home page"
 }
+
 #[handler]
 async fn books() -> &'static str {
     "## this is the h2 book page"
 }
+
 #[handler]
 async fn articles() -> &'static str {
     r#"
@@ -18,8 +20,9 @@ async fn articles() -> &'static str {
         Those are my articles from backend those are my articles from backend \endline
         those are my articles from backend
         those are my articles from backend
-        those are my articles from backend.
-        Those are my articles from backend,
+        those are my articles from backend. \endline
+        \image [image title] api/images/screenshot.png
+        those are my articles from backend,
         those are my articles from backend,
         those are my articles from backend.
     "#
@@ -33,6 +36,7 @@ async fn main() {
                 .push(Router::with_path("home").get(home))
                 .push(Router::with_path("articles").get(articles))
                 .push(Router::with_path("books").get(books)),
+            // TODO .push(Router::with_path("images/<name>").get(images)),
         )
         .push(
             Router::with_path("<**>").get(
