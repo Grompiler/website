@@ -2,16 +2,14 @@ module Main exposing (Msg(..), main, update, view)
 
 import Browser
 import Browser.Navigation as Nav
-import Html exposing (Html, a, button, div, li, p, text, ul)
+import Html exposing (Html, a, div, li, text, ul)
 import Html.Attributes exposing (class, classList, href)
-import Html.Events exposing (onClick)
 import Html.Lazy exposing (lazy)
 import Http
-import List
-import Markdown exposing (Markdown, markdownToHtml)
-import Styles exposing (bodyStyle, headerStyle, paddingStyle, paragraphStyle)
+import Markdown exposing (markdownToHtml)
+import Styles exposing (bodyStyle, headerStyle, paddingStyle)
 import Url exposing (Url)
-import Url.Parser as Parser exposing ((</>), Parser, oneOf, s, string)
+import Url.Parser as Parser exposing ((</>), Parser, s)
 
 
 main : Program () Model Msg
