@@ -14,6 +14,7 @@ RUN rm src/*.rs
 
 # copy source tree
 COPY ./back/src ./src
+COPY ./back/images ./images
 
 # build for release
 RUN rm ./target/release/deps/back*
@@ -38,6 +39,7 @@ FROM debian:buster-slim
 
 # copy the build artifact from the build stage
 COPY --from=back_build /back/target/release/back ./back/run
+COPY --from=back_build /back/images ./back/images
 COPY --from=front_build /front/dist ./front/dist
 
 # set the startup command to run

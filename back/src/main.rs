@@ -3,7 +3,7 @@ use salvo::prelude::*;
 use salvo::serve_static::{static_embed, StaticDir};
 
 #[derive(RustEmbed)]
-#[folder = "../front/images"]
+#[folder = "./images"]
 struct Assets;
 
 #[tokio::main]
