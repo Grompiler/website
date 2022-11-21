@@ -2,7 +2,7 @@ module Markdown exposing (..)
 
 import Html exposing (Html, div, h1, h2, img, p, text)
 import Html.Attributes exposing (class, classList, src)
-import Styles exposing (addStyles, h1Style, h2Style, paddingStyle, paragraphStyle)
+import Styles exposing (addStyles, h1Style, h2Style, imgStyle, imgTitleStyle, paddingStyle, paragraphStyle)
 
 
 type alias Markdown =
@@ -22,7 +22,7 @@ parseLineStyle : Markdown -> Html msg
 parseLineStyle line =
     let
         cleanLine =
-            String.split " " <| String.trim line
+            removeEmptyStrings <| String.split " " <| String.trim line
     in
     case List.head cleanLine of
         Just "#" ->
@@ -40,7 +40,13 @@ parseLineStyle line =
                 Just elements ->
                     case getImageTitleAndPath elements of
                         Just ( title, filePath ) ->
-                            img [ src filePath ] []
+                            div []
+                                [ img [ src filePath, class imgStyle ]
+                                    []
+                                , h1
+                                    [ class imgTitleStyle ]
+                                    [ text title ]
+                                ]
 
                         Nothing ->
                             text ""
@@ -59,9 +65,14 @@ parseLineStyle line =
 
 getImageTitleAndPath : List String -> Maybe ( String, String )
 getImageTitleAndPath list =
-    case List.tail list of
-        Just (title :: filePath :: _) ->
+    case list of
+        title :: filePath :: _ ->
             Just ( title, filePath )
 
         _ ->
             Nothing
+
+
+removeEmptyStrings : List String -> List String
+removeEmptyStrings strings =
+    List.filter (\s -> s /= "") strings

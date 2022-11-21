@@ -31,12 +31,36 @@ async fn main() {
 
 #[handler]
 async fn home() -> &'static str {
-    "# this is the home page"
+    r#"
+        # this is the home page \endline
+        # this is the home page \endline
+        # this is the home page \endline
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        this is a page about something
+        those are my articles from backend
+        those are my articles from backend. \endline
+    "#
 }
 
 #[handler]
 async fn books() -> &'static str {
-    "## this is the h2 book page"
+    r#"
+        # then we have a h1 style \endline
+        ## then we have 2 h2 styles \endline
+        ## then we have 2 h2 styles \endline
+        this page is about the books I read \endline
+        this page is about the books I read
+        this page is about the books I read
+        this page is about the books I read \endline
+        this page is about the books I read \endline
+    "#
 }
 
 #[handler]
@@ -49,7 +73,7 @@ async fn articles() -> &'static str {
         those are my articles from backend
         those are my articles from backend
         those are my articles from backend. \endline
-        \image [image title] api/images/screenshot.png
+        \image Screenshot api/images/screenshot.png \endline
         those are my articles from backend,
         those are my articles from backend,
         those are my articles from backend.
