@@ -1,5 +1,4 @@
 /back/target
-/back/Cargo.lock
 
 /front/elm.js
 /front/package.json
