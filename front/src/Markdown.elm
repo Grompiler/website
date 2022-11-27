@@ -2,7 +2,7 @@ module Markdown exposing (..)
 
 import Html exposing (Html, div, h1, h2, img, p, text)
 import Html.Attributes exposing (class, classList, src)
-import Styles exposing (addStyles, h1Style, h2Style, imgStyle, imgTitleStyle, paddingStyle, paragraphStyle)
+import Styles exposing (addStyles, centerStyle, h1Style, h2Style, imgStyle, imgTitleStyle, paddingStyle, paragraphStyle, textStyle)
 
 
 type alias Markdown =
@@ -15,7 +15,7 @@ markdownToHtml md =
         content =
             List.map parseLineStyle <| String.split "\\endline" md
     in
-    div [ class paragraphStyle ] content
+    div [ class <| addStyles [ paragraphStyle, textStyle ] ] content
 
 
 parseLineStyle : Markdown -> Html msg
@@ -26,10 +26,10 @@ parseLineStyle line =
     in
     case List.head cleanLine of
         Just "#" ->
-            h1 [ class h1Style ] [ text <| String.toUpper <| String.replace "#" "" line ]
+            h1 [ class <| addStyles [ centerStyle, h1Style ] ] [ text <| String.toUpper <| String.replace "#" "" line ]
 
         Just "##" ->
-            h2 [ class h2Style ] [ text <| String.toUpper <| String.replace "##" "" line ]
+            h2 [ class <| addStyles [ centerStyle, h2Style ] ] [ text <| String.toUpper <| String.replace "##" "" line ]
 
         Just "\\image" ->
             let
@@ -40,7 +40,7 @@ parseLineStyle line =
                 Just elements ->
                     case getImageTitleAndPath elements of
                         Just ( title, filePath ) ->
-                            div []
+                            div [ class centerStyle ]
                                 [ img [ src filePath, class imgStyle ]
                                     []
                                 , h1
@@ -60,7 +60,7 @@ parseLineStyle line =
                     text ""
 
                 False ->
-                    p [ class paragraphStyle ] [ text line ]
+                    p [ class <| addStyles [ centerStyle, textStyle ] ] [ text line ]
 
 
 getImageTitleAndPath : List String -> Maybe ( String, String )
