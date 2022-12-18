@@ -15,7 +15,7 @@ markdownToHtml md =
         content =
             List.map parseLineStyle <| String.split "\\endline" md
     in
-    div [ class <| addStyles [ paragraphStyle, textStyle ] ] content
+    div [ class paragraphStyle ] content
 
 
 parseLineStyle : Markdown -> Html msg
@@ -30,6 +30,9 @@ parseLineStyle line =
 
         Just "##" ->
             h2 [ class <| addStyles [ centerStyle, h2Style ] ] [ text <| String.toUpper <| String.replace "##" "" line ]
+
+        Just "\\card" ->
+            div [ class <| addStyles [ centerStyle ] ] [ text "CARD" ]
 
         Just "\\image" ->
             let

@@ -159,8 +159,11 @@ view model =
     { title = "TITRE"
     , body =
         [ div [ class bodyStyle ]
-            [ viewHeader model.page
-            , lazy showPage model
+            [ div
+                [ class "flex flex-col" ]
+                [ viewHeader model.page
+                , lazy showPage model
+                ]
             ]
         ]
     }
@@ -237,11 +240,11 @@ viewHeader page =
         navLink : Route -> { url : String, caption : String, additionalClasses : String } -> Html Msg
         navLink route { url, caption, additionalClasses } =
             a
-                [ href url, class "basis-1/3 bg-gray", class additionalClasses ]
+                [ href url, class "basis-1/3 bg-gray text-center", class additionalClasses ]
                 [ li
                     [ classList
                         [ ( "bg-gray-light rounded-bl-lg rounded-br-lg", isActive { link = route, page = page } )
-                        , ( "h-6 sm:h-10", True )
+                        , ( "h-6 sm:h-10 flex", True )
                         ]
                     ]
                     [ div
@@ -250,8 +253,7 @@ viewHeader page =
                     ]
                 ]
     in
-    div []
-        [ links ]
+    links
 
 
 isActive : { link : Route, page : Page } -> Bool

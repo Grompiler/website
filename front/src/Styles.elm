@@ -3,7 +3,7 @@ module Styles exposing (addStyles, bodyStyle, centerStyle, h1Style, h2Style, hea
 
 paragraphStyle : String
 paragraphStyle =
-    "grid grid-cols-6"
+    "max-w-5xl"
 
 
 textStyle : String
@@ -13,12 +13,12 @@ textStyle =
 
 centerStyle : String
 centerStyle =
-    "col-start-1 xl:col-start-2 col-span-full xl:col-span-4"
+    ""
 
 
 paddingStyle : String
 paddingStyle =
-    "py-8 sm:py-16 px-6 sm:px-12"
+    "py-14 px-12 self-center"
 
 
 h1Style : String
@@ -33,7 +33,7 @@ h2Style =
 
 headerStyle : String
 headerStyle =
-    "font-bold text-black-dark text-base hover:text-blue sm:text-xl h-full grid place-content-center"
+    "font-bold text-black-dark text-base hover:text-blue sm:text-xl basis-full self-center"
 
 
 bodyStyle : String
@@ -53,4 +53,4 @@ imgTitleStyle =
 
 imgStyle : String
 imgStyle =
-    "py-4 sm:py-6"
+    "py-6"
